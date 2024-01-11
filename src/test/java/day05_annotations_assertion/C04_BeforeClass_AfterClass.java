@@ -3,6 +3,7 @@ package day05_annotations_assertion;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -26,12 +27,14 @@ public class C04_BeforeClass_AfterClass {
 
         @Before ve @after YERINE
         @BeforeClass ve @AfterClass kullaniriz
+
+        ONEMLI NOT : @BeforeClass ve @AfterClass kullanan method'lar static olmak ZORUNDADIR
      */
-    WebDriver driver;
+    static WebDriver driver;
     List<WebElement> bulunanUrunlerListesi;
 
     @BeforeClass
-    public void setup(){
+    public static void setup(){
 
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
@@ -39,12 +42,12 @@ public class C04_BeforeClass_AfterClass {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
     @AfterClass
-    public void teardown(){
+    public static void teardown(){
         driver.quit();
     }
 
 
-
+    @Test
     public void test01(){
         // 1- Testotomasyonu sayfasina gidip, sayfaya gittigimizi test edin
         driver.get("https://www.testotomasyonu.com/");
@@ -56,7 +59,7 @@ public class C04_BeforeClass_AfterClass {
             System.out.println("Test otomasyonu sayfasina gitme testi PASSED");
         }else System.out.println("Test otomasyonu sayfasina gitme testi FAILED");
     }
-
+    @Test
     public void test02(){
         // 2- phone icin arama yapip, urun bulunabildigini test edin
 
@@ -74,9 +77,12 @@ public class C04_BeforeClass_AfterClass {
 
     }
 
-    public void test03(){
+    @Test
+    public void test03() throws InterruptedException {
         // 3- ilk urune tiklayip, urun aciklamasinda, case sensitive olmadan phone gectigini test edin
+        bulunanUrunlerListesi = driver.findElements(By.xpath("//*[@*='product-box my-2  py-1']"));
 
+        Thread.sleep(2000);
         bulunanUrunlerListesi.get(0).click();
 
         WebElement urunAciklamaElementi = driver.findElement(By.xpath("//*[@*='product-short-desc  my-2']"));
