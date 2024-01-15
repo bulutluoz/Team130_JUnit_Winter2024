@@ -51,12 +51,29 @@ public class C02_JsAlerts extends TestBase {
         Assert.assertEquals(expectedSonucYazisi,actualSonucYazisi);
     }
 
+    @Test
+    public void ucuncuAlertTest(){
+        //3.Test
+        //	- https://testotomasyonu.com/javascriptAlert adresine gidin
+        ReusableMethods.bekle(1);
+        driver.get("https://testotomasyonu.com/javascriptAlert");
+        //	- 3.alert'e tiklayalim
+        driver.findElement(By.xpath("//*[@onclick='jsPrompt()']")).click();
+        ReusableMethods.bekle(1);
+        //	- Cikan prompt ekranina "Alper" yazdiralim
+        driver.switchTo().alert().sendKeys("Alper");
+        ReusableMethods.bekle(5);
+        //	- OK tusuna basarak alert'i kapatalim
+        driver.switchTo().alert().accept();
+        ReusableMethods.bekle(10);
+        //	- Cikan sonuc yazisinin Alper icerdigini test edelim
+        WebElement sonucYaziElementi = driver.findElement(By.xpath("//*[@id='result']"));
+        String expectedYaziIcerik = "Alper";
+        String actualYazi = sonucYaziElementi.getText();
+
+        Assert.assertTrue(actualYazi.contains(expectedYaziIcerik));
+    }
 
 
-    //3.Test
-    //	- https://testotomasyonu.com/javascriptAlert adresine gidin
-    //	- 3.alert'e tiklayalim
-    //	- Cikan prompt ekranina "Abdullah" yazdiralim
-    //	- OK tusuna basarak alert'i kapatalim
-    //	- Cikan sonuc yazisinin Abdullah icerdigini test edelim
+
 }
