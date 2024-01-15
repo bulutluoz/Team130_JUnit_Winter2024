@@ -1,15 +1,19 @@
 package tests.day06_assertions;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import utilities.ReusableMethods;
 import utilities.TestBase;
+
+import java.util.List;
 
 public class C05_DropdownMenu extends TestBase {
 
     @Test
-    public void dropdowntesti() throws InterruptedException {
+    public void dropdowntesti()  {
         //● https://testotomasyonu.com/form adresine gidin.
         driver.get("https://testotomasyonu.com/form");
         //1. Dogum tarihi gun seçeneğinden index kullanarak 5’i secin
@@ -33,8 +37,18 @@ public class C05_DropdownMenu extends TestBase {
         System.out.println(selectYil.getFirstSelectedOption().getText());
         //5. Ay dropdown menüdeki tum değerleri(value) yazdırın
 
+         List<WebElement> opsiyonElementleriList = selectAy.getOptions();
+
+        System.out.println(ReusableMethods.stringListeCevir(opsiyonElementleriList));
+
+          // listedeki opsiyonlarda Mart degeri oldugunu test edin
+
+        Assert.assertTrue(ReusableMethods.stringListeCevir(opsiyonElementleriList).contains("Mart"));
+
         //6. Ay Dropdown menusunun boyutunun 13 olduğunu test edin
 
-        Thread.sleep(5000);
+        Assert.assertEquals(13, opsiyonElementleriList.size());
+
+        ReusableMethods.bekle(5);
     }
 }
