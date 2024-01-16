@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import utilities.ReusableMethods;
 import utilities.TestBase;
 
+import java.util.Set;
+
 public class C03_KontrolsuzAcilanWindowaGecis extends TestBase {
 
     @Test
@@ -41,10 +43,44 @@ public class C03_KontrolsuzAcilanWindowaGecis extends TestBase {
 
         //4- Dell bilgisayar’a tiklayip acilan sayfada urun fiyatinin $399.00 olduğunu test edin.
         dellElementi.click();
-        //5- Ilk sayfaya donun ve Fashion yazisinin gorunur olduğunu test edin
+        // 2.adim : click yapildiktan sonra WHD'ini kaydettigimiz ilk window'un yanina
+        //          yeni bir tab acildi.
+        //          getWindowHandles() kullanarak acik olan iki window'un
+        //          WHD'lerini bir Set olarak kaydedelim
+
+        Set<String> whDegerleriSeti = driver.getWindowHandles();
+
+
+        // 3.adim : whDegerleriSeti ve ilkWindowWHD kullanarak
+        //          ikinci Window'un WHD'ini bulup kaydedin
+
+        String ikinciWindowWHD ="";
+
+        for (String eachWhd: whDegerleriSeti
+             ) {
+
+            if (!eachWhd.equals(ilkWindowWHD)){
+                ikinciWindowWHD = eachWhd;
+            }
+        }
+        // artik yeni window'a switch yapabiliriz
+        driver.switchTo().window(ikinciWindowWHD);
+        // acilan sayfada urun fiyatinin $399.00 olduğunu test edin.
+        WebElement fiyatElementi = driver.findElement(By.id("priceproduct"));
+
+        String expectedFiyat = "$399.00";
+        String actualFiyat = fiyatElementi.getText();
+
+        Assert.assertEquals(expectedFiyat,actualFiyat);
+
+        //5- Ilk window'a donun ve "Here are some products." yazisinin gorunur olduğunu test edin
+        driver.switchTo().window(ilkWindowWHD);
+        WebElement hereAreYaziElementi = driver.findElement(By.xpath("//*[text()='Here are some products.']"));
+
+        Assert.assertTrue(hereAreYaziElementi.isDisplayed());
 
         //6- Sayfayi kapatin
 
-        ReusableMethods.bekle(10);
+        ReusableMethods.bekle(2);
     }
 }
