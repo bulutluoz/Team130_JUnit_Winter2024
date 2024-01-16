@@ -75,3 +75,10 @@ public class C04_KontrolsuzAcilanWindowaGecis extends TestBase {
         Assert.assertTrue(actualUrl.contains(expectedUrlIcerik));
     }
 }
+
+
+
+
+
+
+
