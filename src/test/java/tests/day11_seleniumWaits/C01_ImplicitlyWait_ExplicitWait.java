@@ -75,7 +75,7 @@ public class C01_ImplicitlyWait_ExplicitWait {
         // implicitlyWait'in tolere edemedigi durumlarda
         // explicitlywait icin WebDriverwait objesi olustururuz
 
-        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(30));
+        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(50));
 
         /*
         wait objesine bir elemani bekletmek istedigimizde iki durum karsimiza cikar
