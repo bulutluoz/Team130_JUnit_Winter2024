@@ -54,9 +54,16 @@ public class C01_KlasikHtmlKodlariylaWebTables extends TestBase {
         System.out.println("Basliklar : " + baslikElementi.getText());
 
         //9. Satir ve sutunu parametre olarak alip, hucredeki bilgiyi döndüren bir method olusturun
-
+        System.out.println(dataDondur(2, 3)); // $40.00
+        System.out.println(dataDondur(4, 2)); // Furniture
 
         //10. 4.satirdaki category degerinin "Furniture" oldugunu test edin
+
+        String expectedData = "Furniture";
+        String actualData = dataDondur(4,2);
+
+        Assert.assertEquals(expectedData,actualData);
+
         ReusableMethods.bekle(2);
     }
 
