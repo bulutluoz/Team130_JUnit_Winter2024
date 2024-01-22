@@ -57,8 +57,39 @@ public class C02_KlasikHtmlKodlariDisindaOlusturulanWebTables  extends TestBase 
 
         //  9. Tabloda " Category" si Furniture olan urunun fiyatini yazdirin
 
+        // category  : (//*[@role='trow'])[   3   ]/ *[@role='tdata'][2]
+        // fiyat     : (//*[@role='trow'])[   3   ]/ *[@role='tdata'][3]
+
+        for (int i = 1; i <= satirElementleriList.size() ; i++) {
+
+            String dinamikCategoryXpath = "(//*[@role='trow'])[" + i + "]/ *[@role='tdata'][2]";
+            String dinamikFiyatXpath = "(//*[@role='trow'])[" + i + "]/ *[@role='tdata'][3]";
+
+            WebElement satirdakiCategoryElementi = driver.findElement(By.xpath(dinamikCategoryXpath));
+            WebElement satirdakiFiyatElementi = driver.findElement(By.xpath(dinamikFiyatXpath));
+
+            if (satirdakiCategoryElementi.getText().equalsIgnoreCase("Men Fashion")){
+                System.out.println(satirdakiFiyatElementi.getText());
+            }
+        }
+
         //10. Bir method olusturun, Test sayfasindan satir ve sutun verildiginde datayi yazdirsin
 
+        datayiYazdir(3,3); // istenen hucredeki data : $399.00
+
+        datayiYazdir(2,2); // istenen hucredeki data : Electronics
+
         ReusableMethods.bekle(3);
+    }
+
+    public void datayiYazdir(int satirNo, int sutunNo){
+
+        // (//*[@role='trow'])[   3   ]/ *[@role='tdata'][   2   ]
+
+        String dinamikXpath = "(//*[@role='trow'])[" + satirNo + "]/ *[@role='tdata'][" +sutunNo + "]";
+
+        WebElement istenenHucreElementi = driver.findElement(By.xpath(dinamikXpath));
+
+        System.out.println("istenen hucredeki data : " + istenenHucreElementi.getText());
     }
 }
