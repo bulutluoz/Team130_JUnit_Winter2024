@@ -108,4 +108,44 @@ public class ReusableMethods {
         }
 
     }
+
+    public static void webelementScreenshot(WebElement webElement){
+        // 1- screenshot alacaginiz webelementi locate edip kaydedin
+        // 2- screenshot'i kaydedecegimiz dosyayi olusturun
+        //    screenshot ismini unique yapabilmek icin, timestamp ekleyelim
+        LocalDateTime ldt = LocalDateTime.now(); // 2024-01-24T19:01:05.777116
+        DateTimeFormatter zamanFormati = DateTimeFormatter.ofPattern("YYMMddHHmmss");
+        String timeStamp = ldt.format(zamanFormati); // 240124190341
+
+        File webelementSS = new File("target/webelementScreenshots/webElement"+timeStamp+".jpg");
+        // 3- webelementi kullanarak screeshot alin ve gecici dosyaya kaydedin
+        File geciciScreenshot = webElement.getScreenshotAs(OutputType.FILE);
+        // 4- gecici dosyayi asil dosyaya kopyalayalim
+        try {
+            FileUtils.copyFile(geciciScreenshot,webelementSS);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public static void webelementScreenshot(WebElement webElement,String screenshotIsim){
+        // 1- screenshot alacaginiz webelementi locate edip kaydedin
+        // 2- screenshot'i kaydedecegimiz dosyayi olusturun
+        //    screenshot ismini unique yapabilmek icin, timestamp ekleyelim
+        LocalDateTime ldt = LocalDateTime.now(); // 2024-01-24T19:01:05.777116
+        DateTimeFormatter zamanFormati = DateTimeFormatter.ofPattern("YYMMddHHmmss");
+        String timeStamp = ldt.format(zamanFormati); // 240124190341
+
+        File webelementSS = new File("target/webelementScreenshots/"+screenshotIsim+timeStamp+".jpg");
+        // 3- webelementi kullanarak screeshot alin ve gecici dosyaya kaydedin
+        File geciciScreenshot = webElement.getScreenshotAs(OutputType.FILE);
+        // 4- gecici dosyayi asil dosyaya kopyalayalim
+        try {
+            FileUtils.copyFile(geciciScreenshot,webelementSS);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 }
