@@ -93,7 +93,7 @@ public class ReusableMethods {
 
         // 2- screenshot'i kaydedecegimiz bir dosya olusturalim
 
-        File tumSayfaScreenshot = new File("target/tumSayfaScreenshot/tss"+resimAdi+".jpeg");
+        File tumSayfaScreenshot = new File("target/tumSayfaScreenshot/"+resimAdi+".jpeg");
 
         // 3- tss objesini kullanarak screenshot alin ve bir File olarak kaydedin
 
