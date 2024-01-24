@@ -44,7 +44,7 @@ public class C02_IstenenWebElementScreenshot extends TestBase {
 
         Assert.assertNotEquals(unExpectedSonucYazisi,actualSonucYazisi);
         // arama sonuc yazisinin screenshot'ini alin
-        ReusableMethods.webelementScreenshot(aramaSonucElementi);
+        ReusableMethods.webelementScreenshot(aramaSonucElementi,"arama sonucu");
 
 
         ReusableMethods.bekle(2);
